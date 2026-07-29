@@ -1,0 +1,43 @@
+#include <iostream>    // Fixed: was <iostream>
+#include <iomanip>     // Added: for fixed and setprecision
+using namespace std;
+
+const int NUM_EXPERIMENTS = 3;    // Fixed: was 3;
+const int NUM_READINGS = 3;       // Fixed: was 3;
+
+int main() {
+    char i, j;                    // Fixed: declared i and j
+    double readingValue, total, average;
+
+    for (i = 1; i <= NUM_EXPERIMENTS; i++) {
+        total = 0;
+        cout << "\nEXPERIMENT " << (int)i << endl;  // Cast char to int for printing 1,2,3
+        cout << "===========" << endl;
+
+        for (j = 1; j <= NUM_READINGS; j++) {
+            cout << "Enter reading " << (int)j << " value: "; // Fixed: was reading
+            cin >> readingValue;
+            total = total + readingValue;  // Fixed: was total - readingValue
+        }
+
+        average = total / NUM_READINGS;
+
+        // Evaluation logic
+        if (average < 100) {
+            cout << "Experiment " << (int)i << " average: " 
+                 << fixed << setprecision(3) << average 
+                 << " are: Below acceptable range" << endl;
+        }
+        else if (average >= 100 && average <= 300) {  // Fixed: was OR, should be AND
+            cout << "Experiment " << (int)i << " average: " 
+                 << fixed << setprecision(3) << average 
+                 << " are: Within acceptable range" << endl;
+        }
+        else { // average > 300
+            cout << "Experiment " << (int)i << " average: " 
+                 << fixed << setprecision(3) << average 
+                 << " are: Above acceptable range" << endl;
+        }
+    }
+    return 0;
+}
